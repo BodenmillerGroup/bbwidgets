@@ -2,6 +2,7 @@ import ipywidgets as wx
 import matplotlib.pyplot as plt
 import numpy as np
 import math
+import os
 import traitlets
 import traittypes
 
@@ -447,40 +448,68 @@ class MultichannelView(wx.GridBox):
 def view_multichannel(images, image_names=None, channel_names=None, channel_vmins=None, channel_vmaxs=None,
                       channel_states=None, channel_colors=None, num_histogram_bins=100, selected_channel=0,
                       num_columns=4, backend='tifffile'):
+    """Interactively visualize a list of multi-channel images
+
+    :param images: list of images; either numpy arrays of shape (c, y, x), or paths to image files on disk
+    :param image_names: list of image names; defaults to file names if None and images is a list of file paths
+    :param channel_names: list of channel names
+    :param channel_vmins: list of channel minima; values below these thresholds will be clipped
+    :param channel_vmaxs: list of channel maxima; values above these thresholds will be clipped
+    :param channel_states: list of booleans (True, False) indicating the state (active, inactive) of each channel
+    :param channel_colors: list of channel colors (matplotlib-supported color strings)
+    :param num_histogram_bins: number of bins to use for displaying the channel histogram
+    :param selected_channel: index of the selected channel
+    :param num_columns: number of columns in the "Gallery" and "Tiles" views
+    :param backend: backend ("tifffile", "imageio") to use for reading image files if images is a list of file paths
+    :return: a MultichannelView instance, which can be displayed directly in Jupyter notebooks
+    """
+    assert isinstance(images, list)
     assert backend in ['tifffile', 'imageio']
-    if not isinstance(images, list):
-        images = [images]
-    # read images
+    mv = MultichannelView()
+    # images
     if np.all([isinstance(image, str) for image in images]):
         if image_names is None:
-            image_names = images
+            image_names = [os.path.basename(image) for image in images]
         if backend == 'tifffile':
             from tifffile import imread
             images = [imread(image) for image in images]
         if backend == 'imageio':
             from imageio import imread
             images = [imread(image) for image in images]
-    # initialize view
-    mv = MultichannelView()
-    mv.images = images
+    mv.images = [image for image in images]
+    # image names
     if image_names is not None:
         assert len(image_names) == mv.get_num_images()
-        mv.image_names = image_names
+        mv.image_names = [image_name for image_name in image_names]
+    # channel names
     if channel_names is not None:
         assert len(channel_names) == mv.get_num_channels()
-        mv.channel_names = channel_names
+        mv.channel_names = [channel_name for channel_name in channel_names]
+    # channel minima
     if channel_vmins is not None:
+        if not hasattr(channel_vmins, '__iter__'):
+            channel_vmins = np.repeat(channel_vmins, mv.get_num_channels())
         assert len(channel_vmins) == mv.get_num_channels()
-        mv.channel_vmins = channel_vmins
+        mv.channel_vmins = [channel_vmin for channel_vmin in channel_vmins]
+    # channel maxima
     if channel_vmaxs is not None:
+        if not hasattr(channel_vmaxs, '__iter__'):
+            channel_vmaxs = np.repeat(channel_vmaxs, mv.get_num_channels())
         assert len(channel_vmaxs) == mv.get_num_channels()
-        mv.channel_vmaxs = channel_vmaxs
+        mv.channel_vmaxs = [channel_vmax for channel_vmax in channel_vmaxs]
+    # channel states
     if channel_states is not None:
+        if not hasattr(channel_states, '__iter__'):
+            channel_states = np.repeat(channel_states, mv.get_num_channels())
         assert len(channel_states) == mv.get_num_channels()
-        mv.channel_states = channel_states
+        mv.channel_states = [channel_state for channel_state in channel_states]
+    # channel colors
     if channel_colors is not None:
+        if not hasattr(channel_colors, '__iter__'):
+            channel_colors = np.repeat(channel_colors, mv.get_num_channels())
         assert len(channel_colors) == mv.get_num_channels()
-        mv.channel_colors = channel_colors
+        mv.channel_colors = [channel_color for channel_color in channel_colors]
+    # other properties
     mv.num_histogram_bins = num_histogram_bins
     mv.selected_channel = selected_channel
     mv.num_columns = num_columns
