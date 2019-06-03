@@ -257,8 +257,9 @@ class MultichannelView(wx.GridBox):
 
     def _refresh_selected_channel_value_range_slider(self):
         if self.selected_channel < self.get_num_channels():
-            self._selected_channel_range_slider.min = self._channel_mins[self.selected_channel]
+            self._selected_channel_range_slider.min = 0  # ensure that, at any point, min < max
             self._selected_channel_range_slider.max = self._channel_maxs[self.selected_channel]
+            self._selected_channel_range_slider.min = self._channel_mins[self.selected_channel]
             self._selected_channel_range_slider.value = (
                 self.channel_vmins[self.selected_channel], self.channel_vmaxs[self.selected_channel])
 
