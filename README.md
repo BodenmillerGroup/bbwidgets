@@ -24,7 +24,6 @@ The `MultichannelView` widget enables the quick visualization of multi-channel i
 
 ```
 > help(bbwidgets.view_multichannel)
-Help on function view_multichannel in module bbwidgets.multichannel_view:
 
 view_multichannel(images, image_names=None, channel_names=None, channel_vmins=None, channel_vmaxs=None,
     channel_states=None, channel_colors=None, num_histogram_bins=100, selected_channel=0, num_columns=4,
@@ -45,7 +44,6 @@ view_multichannel(images, image_names=None, channel_names=None, channel_vmins=No
     selected_channel: index of the selected channel
     num_columns: number of columns in the "Gallery" and "Tiles" views
     backend: backend ('tifffile', 'imageio') to use for reading image files if images is a list of strings
-
 ```
 
 Usage example:
