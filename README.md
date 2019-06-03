@@ -44,7 +44,7 @@ view_multichannel(images, image_names=None, channel_names=None, channel_vmins=No
     num_histogram_bins: number of bins to use for displaying the channel histogram
     selected_channel: index of the selected channel
     num_columns: number of columns in the "Gallery" and "Tiles" views
-    backend: backend ('tifffile', 'imageio') to use for reading image files if images is a list of file paths
+    backend: backend ('tifffile', 'imageio') to use for reading image files if images is a list of strings
 
 ```
 
