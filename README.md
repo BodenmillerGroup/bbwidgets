@@ -67,3 +67,7 @@ channel_names = ['CD44', 'SMA', 'Iridium']
 
 view_multichannel(images, channel_names=channel_names, num_columns=2)
 ```
+
+## License
+
+See the [LICENSE](LICENSE) file in this repository for details.
