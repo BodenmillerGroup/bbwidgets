@@ -22,7 +22,7 @@ import bbwidgets
 
 The `MultichannelView` widget enables the quick visualization of multi-channel images within your Jupyter notebook environment. While it does NOT aim to be a full-fledged image browser, it supports basic functions such as interactive histogram normalization, channel coloring and zoomed/tile view. The main purpose of the MultichannelView widget is to allow the interactive inspection of image processing pipelines.
 
-```python3
+```
 > help(bbwidgets.view_multichannel)
 Help on function view_multichannel in module bbwidgets.multichannel_view:
 
