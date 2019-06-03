@@ -26,7 +26,10 @@ The `MultichannelView` widget enables the quick visualization of multi-channel i
 > help(bbwidgets.view_multichannel)
 Help on function view_multichannel in module bbwidgets.multichannel_view:
 
-view_multichannel(images, image_names=None, channel_names=None, channel_vmins=None, channel_vmaxs=None, channel_states=None, channel_colors=None, num_histogram_bins=100, selected_channel=0, num_columns=4, backend='tifffile')
+view_multichannel(images, image_names=None, channel_names=None, channel_vmins=None, channel_vmaxs=None,
+    channel_states=None, channel_colors=None, num_histogram_bins=100, selected_channel=0, num_columns=4,
+    backend='tifffile')
+
     Interactively visualize a list of multi-channel images
     
     Returns a MultichannelView instance, which can be displayed directly in Jupyter notebooks
