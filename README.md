@@ -7,7 +7,7 @@ Install the current release of bbwidgets from git using pip.
 
 `pip install git+https://github.com/BodenmillerGroup/bbwidgets`
 
-Optional dependencies include _tifffile_ and _imageio_.
+Optional dependencies include the `tifffile` and `imageio` packages.
 
 ## Usage
 
