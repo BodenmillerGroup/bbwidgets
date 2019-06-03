@@ -70,4 +70,6 @@ view_multichannel(images, channel_names=channel_names, num_columns=2)
 
 ## License
 
+This project is licensed under the MIT license.
+
 See the [LICENSE](LICENSE) file in this repository for details.
