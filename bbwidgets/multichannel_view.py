@@ -485,6 +485,3 @@ def view_multichannel(images, image_names=None, channel_names=None, channel_vmin
     mv.selected_channel = selected_channel
     mv.num_columns = num_columns
     return mv
-    # display view
-    #from IPython.display import display
-    #display((mv,))
